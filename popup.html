@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prayer Times</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .prayer-time {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      padding: 5px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    select {
+      width: 100%;
+      margin: 10px 0;
+      padding: 5px;
+    }
+    .prayer-name {
+      font-weight: bold;
+    }
+    .loading {
+      text-align: center;
+      color: #666;
+      margin: 10px 0;
+    }
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 3px solid #3498db;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .error {
+      color: #ff0000;
+      text-align: center;
+      margin: 15px 0;
+    }
+    .location-prompt {
+      text-align: center;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .location-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    .location-button:hover {
+      background-color: #45a049;
+    }
+    .city-search {
+      margin-top: 15px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+    .city-search input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .city-search button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .city-search button:hover {
+      background-color: #1976D2;
+    }
+    .city-search button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .location-info {
+      margin-top: 10px;
+      padding: 8px;
+      background-color: #e3f2fd;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .search-results {
+      margin-top: 10px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .search-result-item {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+    .search-result-item:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+  <h2>Prayer Times</h2>
+  <select id="calculation-method">
+    <option value="MWL">Muslim World League</option>
+    <option value="ISNA">Islamic Society of North America</option>
+    <option value="Egypt">Egyptian General Authority</option>
+    <option value="Makkah">Umm al-Qura University, Makkah</option>
+    <option value="Karachi">University of Islamic Sciences, Karachi</option>
+    <option value="Tehran">Institute of Geophysics, Tehran</option>
+    <option value="Jafari">Shia Ithna Ashari</option>
+  </select>
+  <div id="times-container">
+    <div class="loading">Loading prayer times...</div>
+  </div>
+  <div id="location-prompt" style="display: none;">
+    <div class="location-prompt">
+      <p>Prayer times require location access.</p>
+      <button class="location-button" id="enable-location">Enable Location Access</button>
+      <div class="city-search">
+        <p>Or search for your city:</p>
+        <input type="text" id="city-search" placeholder="Enter city name (e.g., London, UK)">
+        <button id="search-city">Search City</button>
+        <div id="search-results" class="search-results"></div>
+        <div id="location-info" class="location-info" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+  <script src="PrayTimes.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
